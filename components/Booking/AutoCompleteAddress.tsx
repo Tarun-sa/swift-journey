@@ -46,13 +46,14 @@ const AutoCompleteAddress = () => {
     setActiveField(null);
 
     const response = await fetch(
-      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&country=IN&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
+ 
 
     setSourceCord({
-      latitude: data.features[0].geometry.coordinates[0],
-      longitude: data.features[0].geometry.coordinates[1],
+      latitude: data.features[0].geometry.coordinates[1],
+      longitude: data.features[0].geometry.coordinates[0],
     });
   };
 
@@ -64,10 +65,11 @@ const AutoCompleteAddress = () => {
       `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
+ 
 
     setDestinationCord({
-      latitude: data.features[0].geometry.coordinates[0],
-      longitude: data.features[0].geometry.coordinates[1],
+      latitude: data.features[0].geometry.coordinates[1],
+      longitude: data.features[0].geometry.coordinates[0],
     });
   };
 

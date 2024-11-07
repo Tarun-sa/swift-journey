@@ -21,8 +21,8 @@ export const UserLocationContext = createContext<ILocationContext | null>(null);
 
 export function LocationContextProvider({ children }: { children: ReactNode }) {
   const [userLocation, setUserLocation] = useState<ILocation>({
-    latitude: -80,
-    longitude: 40,
+    latitude:null,
+    longitude:null
   });
 
   useEffect(() => {
