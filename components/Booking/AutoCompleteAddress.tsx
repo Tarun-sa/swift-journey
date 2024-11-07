@@ -1,4 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { generateUUID } from "@/app/api/search-address/route";
+import { DestinationCordinateContext } from "@/context/DestinationCordContext";
+import { SourceCordinateContext } from "@/context/SourceCordContext";
+import React, { useContext, useEffect, useState } from "react";
+
+const MAPBOX_RETRIEVE_URL =
+  "https://api.mapbox.com/search/searchbox/v1/retrieve";
 
 const AutoCompleteAddress = () => {
   const [sourceAddress, setSourceAddress] = useState("");
@@ -7,6 +13,9 @@ const AutoCompleteAddress = () => {
   const [activeField, setActiveField] = useState<
     "source" | "destination" | null
   >(null);
+
+  const { setSourceCord } = useContext(SourceCordinateContext);
+  const { setDestinationCord } = useContext(DestinationCordinateContext);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,7 +36,39 @@ const AutoCompleteAddress = () => {
     });
     const data = await response.json();
     setAddressLists(data);
-    console.log(data, "data");
+  };
+
+  const sessionToken = generateUUID();
+
+  const onSourceAddressClick = async (item: any) => {
+    setSourceAddress(item.name + ", " + item.full_address);
+    setAddressLists([]);
+    setActiveField(null);
+
+    const response = await fetch(
+      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+    );
+    const data = await response.json();
+
+    setSourceCord({
+      latitude: data.features[0].geometry.coordinates[0],
+      longitude: data.features[0].geometry.coordinates[1],
+    });
+  };
+
+  const onDestinationAddressClick = async (item: any) => {
+    setDestinationAddress(item.name + ", " + item.full_address);
+    setAddressLists([]);
+    setActiveField(null);
+    const response = await fetch(
+      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+    );
+    const data = await response.json();
+
+    setDestinationCord({
+      latitude: data.features[0].geometry.coordinates[0],
+      longitude: data.features[0].geometry.coordinates[1],
+    });
   };
 
   return (
@@ -53,13 +94,11 @@ const AutoCompleteAddress = () => {
                   <h2
                     key={index}
                     onClick={() => {
-                      setSourceAddress(item.name+", "+item.full_address);
-                      setAddressLists([]);
-                      setActiveField(null);
+                      onSourceAddressClick(item);
                     }}
                     className="search-items"
                   >
-                    {item.name+", "+item.full_address}
+                    {item.name + ", " + item.full_address}
                   </h2>
                 )
             )}
@@ -88,13 +127,11 @@ const AutoCompleteAddress = () => {
                   <h2
                     key={index}
                     onClick={() => {
-                      setDestinationAddress(item.name+", "+item.full_address);
-                      setAddressLists([]);
-                      setActiveField(null);
+                      onDestinationAddressClick(item);
                     }}
                     className="search-items"
                   >
-                   {item.name+", "+item.full_address}
+                    {item.name + ", " + item.full_address}
                   </h2>
                 )
             )}

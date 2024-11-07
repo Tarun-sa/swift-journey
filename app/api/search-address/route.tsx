@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 const BASE_URL='https://api.mapbox.com/search/searchbox/v1/suggest';
 
 // Function to generate a UUID
-function generateUUID() {
+export function generateUUID() {
     return crypto.randomUUID();
 }
 
