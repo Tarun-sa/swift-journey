@@ -27,5 +27,8 @@
       .search-items{
         @apply p-3 hover:bg-gray-300 cursor-pointer rounded-md
       }
+      .cars-list-wrapper{
+        @apply m-2 p-3 border-[1px] rounded-md cursor-pointer hover:border-lime-500
+      }
     
 }
