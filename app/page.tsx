@@ -2,6 +2,7 @@
 import Booking from "@/components/Booking";
 import MapBoxMap from "@/components/Map/MapBoxMap";
 import { DestinationCordProvider } from "@/context/DestinationCordContext";
+import { DirectionDataProvider } from "@/context/DirectionDataContext";
 import { SourceCordProvider } from "@/context/SourceCordContext";
 import { LocationContextProvider } from "@/context/UserLocationContext";
 
@@ -11,14 +12,16 @@ export default function Home() {
       <LocationContextProvider>
         <SourceCordProvider>
           <DestinationCordProvider>
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              <div className="">
-                <Booking />
+            <DirectionDataProvider>
+              <div className="grid grid-cols-1 md:grid-cols-3">
+                <div className="">
+                  <Booking />
+                </div>
+                <div className="col-span-2 order-first md:order-last">
+                  <MapBoxMap />
+                </div>
               </div>
-              <div className="col-span-2 order-first md:order-last">
-                <MapBoxMap />
-              </div>
-            </div>
+            </DirectionDataProvider>
           </DestinationCordProvider>
         </SourceCordProvider>
       </LocationContextProvider>

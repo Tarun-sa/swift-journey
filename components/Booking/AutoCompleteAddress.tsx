@@ -3,8 +3,10 @@ import { DestinationCordinateContext } from "@/context/DestinationCordContext";
 import { SourceCordinateContext } from "@/context/SourceCordContext";
 import React, { useContext, useEffect, useState } from "react";
 
-const MAPBOX_RETRIEVE_URL =
+const MAPBOX_MARKER_URL =
   "https://api.mapbox.com/search/searchbox/v1/retrieve";
+
+
 
 const AutoCompleteAddress = () => {
   const [sourceAddress, setSourceAddress] = useState("");
@@ -46,7 +48,7 @@ const AutoCompleteAddress = () => {
     setActiveField(null);
 
     const response = await fetch(
-      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&country=IN&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+      `${MAPBOX_MARKER_URL}/${item.mapbox_id}?session_token=${sessionToken}&country=IN&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
  
@@ -62,7 +64,7 @@ const AutoCompleteAddress = () => {
     setAddressLists([]);
     setActiveField(null);
     const response = await fetch(
-      `${MAPBOX_RETRIEVE_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
+      `${MAPBOX_MARKER_URL}/${item.mapbox_id}?session_token=${sessionToken}&access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`
     );
     const data = await response.json();
  
