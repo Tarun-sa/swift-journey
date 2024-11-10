@@ -13,11 +13,11 @@ export default function Home() {
         <SourceCordProvider>
           <DestinationCordProvider>
             <DirectionDataProvider>
-              <div className="grid grid-cols-1 md:grid-cols-3">
+              <div className="grid grid-cols-1 custom:grid-cols-3">
                 <div className="">
                   <Booking />
                 </div>
-                <div className="col-span-2 order-first md:order-last">
+                <div className="col-span-2 order-first custom:order-last">
                   <MapBoxMap />
                 </div>
               </div>

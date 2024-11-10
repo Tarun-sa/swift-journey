@@ -22,7 +22,7 @@ const Cars = () => {
   return (
     <div className="mt-3">
       <h2 className="font-medium text-gray-800">Select Cars</h2>
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 overflow-auto mt-1">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 overflow-auto mt-1">
         {rentalCars?.map((car: RentalCar) => {
           return (
             <div

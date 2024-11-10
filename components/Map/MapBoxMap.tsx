@@ -9,6 +9,7 @@ import { DestinationCordinateContext } from "@/context/DestinationCordContext";
 import { generateUUID } from "@/app/api/search-address/route";
 import { DirectionDataContext } from "@/context/DirectionDataContext";
 import MapBoxRoute from "./MapBoxRoute";
+import DistanceTime from "./DistanceTime";
 
 const MAPBOX_DRIVING_ENDPOINT =
   "https://api.mapbox.com/directions/v5/mapbox/driving/";
@@ -105,7 +106,7 @@ const MapBoxMap = () => {
               latitude: userLocation.latitude,
               zoom: 10,
             }}
-            style={{ width: "100vw", height: 770, borderRadius: 15 }}
+            style={{ width: "100vw", height: 820, borderRadius: 15 }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
           >
             <Markers />
@@ -117,6 +118,11 @@ const MapBoxMap = () => {
           </Map>
         )}
       </div>
+      {directionData?.routes?.length ? (
+        <div className="absolute bottom-[100px] right-6 z-20">
+          <DistanceTime />
+        </div>
+      ) : null}
     </div>
   );
 };

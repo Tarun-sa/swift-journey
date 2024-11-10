@@ -10,17 +10,17 @@ const Booking = () => {
 
     useEffect(() => {
         // Only set the screen height in the browser
-        setScreenHeight(window.innerHeight*0.75);
+        setScreenHeight(window.innerHeight*0.80);
     }, []);
 
     return (
         <div className='p-5'>
             <h2 className='heading'>Booking</h2>
-            <div className='border-[1px] p-5 rounded-lg' style={{ height: screenHeight }}>
+            <div className='border-[1px] p-4 rounded-lg' style={{ height: screenHeight }}>
                 <AutoCompleteAddress />
                 <Cars />
                 <Payment />
-                <button className='bg-lime-400  p-2 rounded-lg w-full mt-4 font-medium ' >Book</button>
+                <button className='bg-lime-400 p-2 rounded-lg w-full mt-4 font-medium mb-2' >Book</button>
             </div>
         </div>
     );

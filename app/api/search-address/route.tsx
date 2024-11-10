@@ -14,7 +14,7 @@ export async function GET(request:any) {
     const sessionToken = generateUUID(); 
 
     const response = await fetch(
-        `${BASE_URL}?q=${searchText}&language=en&limit=8&session_token=${sessionToken}&country=IN&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`,{
+        `${BASE_URL}?q=${searchText}&language=en&limit=6&session_token=${sessionToken}&country=IN&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`,{
             headers:{
                 'Content-Type':'application/json'
             }
